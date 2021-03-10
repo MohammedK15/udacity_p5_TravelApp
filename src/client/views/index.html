@@ -3,36 +3,76 @@
   <head>
     <meta charset="utf-8" />
     <title>Sentiment Analyzer</title>
+    <!--    Bootstrap  -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?&family=Roboto:wght@300;500;700" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
   </head>
 
   <body>
-  <header>
-    <h1 class="title">
-      Sentient Analyzer
-    </h1>
+  <header class="container">
+    <div class="row">
+      <h1 class="title col-4 offset-4 text-center">
+        Weather Forecast
+      </h1>
+    </div>
   </header>
 
     <main>
       <div class="container">
-        <p>Enter a URL of an article / a blog to discover its sentiment.</p>
-        <section>
-          <form id="form_article">
-            <label for="url_article">URL</label>
-            <input id="url_article" type="text" name="input" value="" placeholder="Enter Article URL here" />
-            <button type="submit" class="btn">
-                Submit
-            </button>
+        <div class="row">
+          <div class="col-6 offset-3 text-center">
+            <p>Enter a URL of an article / a blog to discover its sentiment.</p>
+          </div>
+        </div>
+        <section class="form-group">
+          <form id="travel_form">
+            <div class="row mb-1">
+              <label for="travelCityInput" class="col-2 offset-1 col-form-label">Example label</label>
+              <div class="col-8">
+                <input type="text" class="form-control" id="travelCityInput" placeholder="Example input placeholder">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <label for="start-date-input" class="col-2 offset-1 col-form-label">Start Date</label>
+              <div class="col-3">
+                <input class="form-control" type="date" value="2021-03-04" id="start-date-input">
+              </div>
+              <label for="end-date-input" class="col-2 col-form-label">End Date</label>
+              <div class="col-3">
+                <input class="form-control" type="date" value="2021-03-05" id="end-date-input">
+              </div>
+            </div>
+            <div class="row justify-content-center mb-1">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
           </form>
         </section>
-        <section>
-          <strong>Form Results:</strong>
-          <div id="score_tag"></div>
-          <div id="agreement"></div>
-          <div id="subjectivity"></div>
-          <div id="confidence"></div>
-          <div id="irony"></div>
+      </div>
+      <div class="container">
+        <section class="travel-result">
+          <div class="row">
+            <div class="col-8 offset-2">
+              <div class="accordion" id="accordiontravelResult1">
+                <div class="card">
+                  <div class="card-header" id="heading1">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse1" aria-controls="collapse1">
+                        Collapsible Group Item #1
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordiontravelResult1">
+                    <div class="card-body">
+                      Some placeholder content for the first accordion panel. This panel is shown by default, thanks to the <code>.show</code> class.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </main>
@@ -48,7 +88,7 @@
             <a href="#" class="social__item"><i class="fab fa-github"></i></a>
           </nav>
           <div class="footer__copyright">
-            Mohammed Elzanaty &copy; - 2021 Powered by
+            Mohammed Almufarrij &copy; - 2021 Powered by
             <a href="https://www.udacity.com/" target="_blank">Udacity</a>
           </div>
         </div>
@@ -64,5 +104,8 @@
         })
       }
     </script>
+<!--    Bootstrap  JS   -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
   </body>
 </html>
