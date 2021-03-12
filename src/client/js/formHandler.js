@@ -20,16 +20,7 @@ const postData = async (url = '', data = {}) => {
 }
 
 const handleSubmit = async () => {
-  /**
-   * Get Value of the input for URL
-   * Check if it's URL or not
-   *  yes
-   *      send it to the backend
-   *  no
-   *      show user message it's not valid URL
-   */
   console.log('||| in handleSubmit function')
-
   try {
     // get values from UI
     const travelCity = document.getElementById('travelCityInput').value;
@@ -39,19 +30,21 @@ const handleSubmit = async () => {
     if (isDateValid(travelStartDate, travelEndDate)) {
       // get the duration from MomentJS
       const momentStartDate = moment(travelStartDate);
-      const momentEndDate = moment(travelEndDate);
-      const durationDays = moment.duration(momentEndDate.diff(momentStartDate)).asDays();
+      const momentNow = moment();
+      const daysToStart = momentStartDate.diff(momentNow, 'days') + 1;
+
       const travelInfo = {
-        'travelCity': travelCity,
-        'travelDuration': durationDays,
+          'travelCity': travelCity,
+          'daysToStartTravel': daysToStart,
+          'travelStart': travelStartDate,
+          'travelEnd': travelEndDate
       }
-      console.log('||| before postData server side - data passed: ' + travelInfo['travelCity'] + ' ** ' + travelInfo['travelDuration'])
+      console.log('||| before postData server side - data passed: ' + travelInfo['travelCity'] + ' ** ' + travelInfo['daysToStartTravel'])
 
       const data = await postData('http://localhost:8081/add-travel', {travelInfo});
       console.log(data)
     }
-    // todo add some message if the dates are note valid below or in "isDateValid" function
-
+    // todo update the UI
     // const articleUrl = document.getElementById('url_article').value;
     // if (isURLValid(articleUrl)) {
     //   // port 8081 is for the server

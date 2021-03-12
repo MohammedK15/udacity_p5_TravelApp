@@ -28,11 +28,9 @@ app.get('/', function (req, res) {
 })
 
 function saveTravel(travelData) {
-  // TODO add some logic to same the data of on file
   console.log('||| in saveTravel function')
-  console.log('||| data: ', travelData)
+  console.log('||| data to save: ', travelData)
 
-  console.log(typeof allTravels)
   allTravels.push(travelData)
   console.log('||| all travel: ', allTravels)
 
@@ -41,7 +39,8 @@ function saveTravel(travelData) {
 app.post('/add-travel', async (req, res) => {
   const {travelInfo} = req.body;
   console.log(travelInfo.travelCity)
-  await handleWeatherbitApi(travelInfo.travelCity, travelInfo.travelDuration)
+  await handleWeatherbitApi(travelInfo.travelCity, travelInfo.daysToStartTravel, travelInfo.travelStart,
+      travelInfo.travelEnd)
       .then(function (weatherbiteResponse){
         handleGeoNameApi(weatherbiteResponse)
             .then(function (geoNameResponse){
@@ -51,30 +50,46 @@ app.post('/add-travel', async (req, res) => {
             //   saveTravel(pixabayResponse);
         // })
       })
-
 });
-// call the Weatherbit API input[durationDate, city, key] output[weatherDescription, lat, lon]
-const handleWeatherbitApi = async (city, duration) => {
+// call the Weatherbit API input[Date, city, key] output[weatherDescription, lat, lon]
+const handleWeatherbitApi = async (city, daysToStart, startDate, endDate) => {
   console.log('||| in handleWeatherbitApi function')
-  console.log('||| data: ' + city + ' ** '+ duration)
+  console.log('||| data: ' + city + ' ** '+ daysToStart)
 
-  const WEATHERBIT_API_BASE_URL = 'https://api.weatherbit.io/v2.0/forecast/daily'
+  const WEATHERBIT_API_BASE_URL = 'https://api.weatherbit.io/v2.0/'
   const WEATHERBIT_API_KEY = process.env.WEATHERBIT_API_KEY
-  const weatherbitApiUrl = WEATHERBIT_API_BASE_URL + '?city=' + city + '&days=' + duration +
-      '&key=' + WEATHERBIT_API_KEY;
+  let weatherbitApiUrl = '';
+
+  // to check if the the trip within a week or not
+  if(daysToStart >= 7){
+    weatherbitApiUrl = WEATHERBIT_API_BASE_URL + 'forecast/daily' + '?city=' + city
+        + '&start_date=' + startDate + '&end_date=' + endDate + '&key=' + WEATHERBIT_API_KEY;
+  }else {
+    weatherbitApiUrl = WEATHERBIT_API_BASE_URL + 'current' + '?city=' + city + '&key=' + WEATHERBIT_API_KEY;
+  }
 
   console.log(weatherbitApiUrl);
   const response = await fetch(weatherbitApiUrl);
   console.log('||| weatherbitApi AFTER FETCH')
   try {
     const APIData = await response.json();
-    const apiResponseData = {
-      description: APIData.data[0].weather.description,
-      lat: APIData.lat,
-      lon: APIData.lon,
-      city: city,
+    let lat = '';
+    let lon = '';
+    if (daysToStart >= 7){
+      lat = APIData.lat;
+      lon = APIData.lon;
+    }else{
+      lat = APIData.data[0].lat;
+      lon = APIData.data[0].lon;
     }
-    return apiResponseData;
+    return {
+      'description': APIData.data[0].weather.description,
+      'lat': lat,
+      'lon': lon,
+      'city': city,
+      'startDate': startDate,
+      'endDate': endDate,
+    };
   }catch (e) {
     console.log('Error in WeatherbitApi: ' + e);
   }
@@ -95,12 +110,13 @@ const handleGeoNameApi = async (data) => {
 
   try{
     const APIData = await response.json();
-    const apiResponseData = {
+    return {
       'country': APIData.countryName,
       'city': data.city,
       'description': data.description,
-    }
-    return apiResponseData;
+      'startDate': data.startDate,
+      'endDate': data.endDate,
+    };
   }catch (e) {
     console.log('Error in GeoNameApi: ' + e);
   }
@@ -134,6 +150,8 @@ const handlePixabayApi = async (data) => {
       'country': data.country,
       'city': data.city,
       'description': data.description,
+      'startDate': data.startDate,
+      'endDate': data.endDate,
     }
     console.log('||| final data: ', apiResponseData)
     saveTravel(apiResponseData)
