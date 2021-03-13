@@ -44,7 +44,6 @@ const handleSubmit = async () => {
       const data = await postData('http://localhost:8081/add-travel', {travelInfo});
       console.log(data)
     }
-    // todo update the UI
     // const articleUrl = document.getElementById('url_article').value;
     // if (isURLValid(articleUrl)) {
     //   // port 8081 is for the server

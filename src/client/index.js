@@ -1,5 +1,6 @@
 import isDateValid from './js/validateDate';
 import handleSubmit from './js/formHandler';
+import updateUI from "./js/updateUserInterface";
 
 import './styles/style.scss';
 
@@ -11,6 +12,10 @@ window.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
     console.log('||| in addEventListener')
     handleSubmit();
+    updateUI();
   })
 })
+
+updateUI();
+
 export { isDateValid, handleSubmit }

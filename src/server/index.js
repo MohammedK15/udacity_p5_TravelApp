@@ -21,10 +21,10 @@ const allTravels = []
 
 app.get('/', function (req, res) {
   // for the production build
-  res.sendFile('dist/index.html');
+  // res.sendFile('dist/index.html');
 
   // for the development build
-  // res.sendFile(path.resolve('src/client/views/index.html'));
+  res.sendFile(path.resolve('src/client/views/index.html'));
 })
 
 function saveTravel(travelData) {
@@ -33,8 +33,18 @@ function saveTravel(travelData) {
 
   allTravels.push(travelData)
   console.log('||| all travel: ', allTravels)
-
 }
+
+app.get('/get-travels',  (req, res) => {
+  console.log('||| GET request get travels')
+  res.json(
+      {
+        status: 'success',
+        data: allTravels,
+        message: 'retrieved data',
+      }
+  )
+});
 
 app.post('/add-travel', async (req, res) => {
   const {travelInfo} = req.body;
