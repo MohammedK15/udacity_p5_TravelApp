@@ -1,8 +1,6 @@
 import moment from "moment";
 
-
 const isDateValid = (startDate, endDate) => {
-    // todo add a check here
     const now = moment()
     const momentStartDate = moment(startDate);
     const momentEndDate = moment(endDate);
@@ -17,7 +15,7 @@ const isDateValid = (startDate, endDate) => {
             close: true,
             gravity: "bottom", // `top` or `bottom`
             position: 'center', // `left`, `center` or `right`
-            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+            backgroundColor: "linear-gradient(to right, #e34f51, #9fdfd8a3)",
             stopOnFocus: true, // Prevents dismissing of toast on hover
             // onClick: function(){} // Callback after click
         }).showToast();
@@ -30,7 +28,7 @@ const isDateValid = (startDate, endDate) => {
             close: true,
             gravity: "bottom", // `top` or `bottom`
             position: 'center', // `left`, `center` or `right`
-            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+            backgroundColor: "linear-gradient(to right, #e34f51, #9fdfd8a3)",
             stopOnFocus: true, // Prevents dismissing of toast on hover
         }).showToast();
         return false
@@ -42,7 +40,7 @@ const isDateValid = (startDate, endDate) => {
             close: true,
             gravity: "bottom", // `top` or `bottom`
             position: 'center', // `left`, `center` or `right`
-            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+            backgroundColor: "linear-gradient(to right, #e34f51, #9fdfd8a3)",
             stopOnFocus: true, // Prevents dismissing of toast on hover
         }).showToast();
         return false
