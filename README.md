@@ -15,8 +15,7 @@ Mohammed Almufarrij.
 * Web application framework for routing - Express.
 * Build tool - Webpack.
 * External script - Service Worker.
-* 
-* 
+
 
 ## Steps to start the project in command line:
 * Run the command "pip install npm".
