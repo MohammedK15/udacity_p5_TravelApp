@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
 function saveTravel(travelData) {
   console.log('||| in saveTravel function')
   console.log('||| data to save: ', travelData)
-
+  // 'countryImg', 'cityImg', 'country', 'city', 'description', 'startDate', 'endDate'
   allTravels.push(travelData)
 
   console.log('||| all travel: ', allTravels)

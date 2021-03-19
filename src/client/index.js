@@ -4,6 +4,8 @@ import updateUI from "./js/updateUserInterface";
 
 import './styles/style.scss';
 
+// TODO delete old or unneeded code and format the code text
+
 // to wait until the page fully loaded
 window.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('travel_form');

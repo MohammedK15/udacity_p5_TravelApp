@@ -1,5 +1,37 @@
 .card{
-  border-radius: 10px;
+  border-radius: 20px;
   border: 2px solid #388087;
+  margin: 5px 0px;
+}
 
+.card-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.img-country__flag{
+  height: 60px;
+}
+
+.countryCity__Name{
+  margin: auto;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.card-body{
+  border-radius: 0 0 18px 18px;
+}
+
+.ul-body{
+  list-style-type: none;
+  text-align-last: start;
+  min-height: 150px;
+  display: grid;
+}
+
+.ul-body li{
+  color: #f6f6f2;
+  -webkit-text-stroke: 1px #186067;
+  font-size: 20px;
 }

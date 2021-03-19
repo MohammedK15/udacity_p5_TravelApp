@@ -17,26 +17,38 @@ const updateUI = async () => {
 
         for (let i = 0 ; i < travels.length ; i++){
             // create the UI for each travel
+            // travels contain ['countryImg', 'cityImg', 'country', 'city', 'description', 'startDate', 'endDate']
             const card = document.createElement('div');
             card.setAttribute('class', 'card');
 
             const heading = document.createElement('div');
             heading.setAttribute('class', 'card-header');
+            // heading.setAttribute('class', 'align-items-center');
             heading.setAttribute('id', `heading${i+1}`);
             card.appendChild(heading);
 
-            const h5 = document.createElement('h5');
-            h5.setAttribute('class', 'mb-0');
-            heading.appendChild(h5);
+            // const h5 = document.createElement('h5');
+            // h5.setAttribute('class', 'mb-0');
+            // heading.appendChild(h5);
+
+            const countryFlagImg = document.createElement('img');
+            countryFlagImg.setAttribute('class', 'img-country__flag');
+            countryFlagImg.setAttribute('src', travels[i].countryImg);
+            countryFlagImg.setAttribute('alt', `${travels[i].country} Flag`);
+            heading.appendChild(countryFlagImg);
+
+            const countryCityNames = document.createElement('h5');
+            countryCityNames.setAttribute('class', 'countryCity__Name');
+            countryCityNames.innerText = `${travels[i].city}, ${travels[i].country}`;
+            heading.appendChild(countryCityNames);
 
             const button = document.createElement('button');
             button.setAttribute('class', 'btn btn-link');
             button.setAttribute('data-toggle', 'collapse');
             button.setAttribute('data-target', `#collapse${i+1}`);
-            // button.setAttribute('aria-expanded', 'true');
             button.setAttribute('aria-controls', `collapse${i+1}`);
-            button.innerText = travels[i].city;
-            h5.appendChild(button);
+            button.innerText = 'Toggle';
+            heading.appendChild(button);
 
             const collapseBody = document.createElement('div');
             collapseBody.setAttribute('id',`collapse${i+1}`);
@@ -47,7 +59,34 @@ const updateUI = async () => {
 
             const cardBody = document.createElement('div');
             cardBody.setAttribute('class', 'card-body');
+            cardBody.style.backgroundImage = `url(${travels[i].cityImg})`;
             collapseBody.appendChild(cardBody);
+
+            // const backgroundBody = document.createElement('div');
+            // backgroundBody.setAttribute('class', 'background-img');
+            // backgroundBody.style.backgroundImage = `url(${travels[i].cityImg})`;
+            // cardBody.appendChild(backgroundBody);
+
+            const bodyUL = document.createElement('ul');
+            bodyUL.setAttribute('class', 'ul-body');
+            cardBody.appendChild(bodyUL);
+
+            const startDateLI = document.createElement('li');
+            startDateLI.innerText = `Arrived Date: ${travels[i].startDate}`;
+            bodyUL.appendChild(startDateLI);
+
+            const endDateLI = document.createElement('li');
+            endDateLI.innerText = `Depart Date: ${travels[i].endDate}`;
+            bodyUL.appendChild(endDateLI);
+
+            const description = document.createElement('li');
+            description.innerText = `The Weather Forecast: ${travels[i].description}`;
+            bodyUL.appendChild(description);
+
+            // const bodyContent = document.createElement('h3');
+            // bodyContent.setAttribute('class', 'body-content');
+            // bodyContent.innerText = `Your trip from (${travels[i].startDate}) till (${travels[i].endDate}) to [${travels[i].city}, ${travels[i].country}] will be ${travels[i].description}.`
+            // cardBody.appendChild(bodyContent);
 
             fragment.appendChild(card);
         }
