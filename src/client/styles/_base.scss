@@ -21,7 +21,9 @@ body {
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #252a32;
+  color: #388087;
+
+  background-color: #f6f6f2;
 }
 
 main {
@@ -45,10 +47,12 @@ section {
   text-transform: uppercase;
   margin-bottom: 25px;
   margin-top: 0;
-  color: #f8c803;
+  color: #266165;
   font-weight: bold;
   position: relative;
   padding-bottom: 0.5rem;
+
+  font-size: 3em;
 }
 
 .title::after {
@@ -58,5 +62,11 @@ section {
   left: 44%;
   height: 2px;
   width: 40px;
-  background: #636467;
+  background: #388087;
+}
+
+.toastify__font-style{
+  //-webkit-text-stroke: .25px #215a60;
+  //font-size: 20px;
+  color: #266165;
 }

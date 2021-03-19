@@ -8,9 +8,12 @@ const updateUI = async () => {
         const travelsDataJSON = await getTravel.json();
         console.log(travelsDataJSON)
 
+        const accordion = document.getElementById('accordion');
+        // to clean if there any previous result to avoid duplication
+        accordion.innerText = ''
+
         const fragment = document.createDocumentFragment();
         const travels = travelsDataJSON.data;
-        const accordion = document.getElementById('accordion');
 
         for (let i = 0 ; i < travels.length ; i++){
             // create the UI for each travel
@@ -48,7 +51,7 @@ const updateUI = async () => {
 
             fragment.appendChild(card);
         }
-        accordion.appendChild(fragment)
+        accordion.appendChild(fragment);
     } catch (e) {
         console.log('error: ', e)
     }

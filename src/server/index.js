@@ -21,10 +21,10 @@ const allTravels = []
 
 app.get('/', function (req, res) {
   // for the production build
-  // res.sendFile('dist/index.html');
+  res.sendFile('dist/index.html');
 
   // for the development build
-  res.sendFile(path.resolve('src/client/views/index.html'));
+  // res.sendFile(path.resolve('src/client/views/index.html'));
 })
 
 function saveTravel(travelData) {
@@ -32,6 +32,7 @@ function saveTravel(travelData) {
   console.log('||| data to save: ', travelData)
 
   allTravels.push(travelData)
+
   console.log('||| all travel: ', allTravels)
 }
 
@@ -51,15 +52,19 @@ app.post('/add-travel', async (req, res) => {
   console.log(travelInfo.travelCity)
   await handleWeatherbitApi(travelInfo.travelCity, travelInfo.daysToStartTravel, travelInfo.travelStart,
       travelInfo.travelEnd)
-      .then(function (weatherbiteResponse){
-        handleGeoNameApi(weatherbiteResponse)
-            .then(function (geoNameResponse){
-              handlePixabayApi(geoNameResponse)
+      .then(async function (weatherbiteResponse){
+        await handleGeoNameApi(weatherbiteResponse)
+            .then(async function (geoNameResponse){
+              await handlePixabayApi(geoNameResponse)
             })
+
+        console.log('#############################')
             // .then(function (pixabayResponse){
             //   saveTravel(pixabayResponse);
         // })
       })
+  console.log('||| return to client side')
+  res.send({'msg': 'saved'})
 });
 // call the Weatherbit API input[Date, city, key] output[weatherDescription, lat, lon]
 const handleWeatherbitApi = async (city, daysToStart, startDate, endDate) => {
@@ -92,6 +97,9 @@ const handleWeatherbitApi = async (city, daysToStart, startDate, endDate) => {
       lat = APIData.data[0].lat;
       lon = APIData.data[0].lon;
     }
+
+    console.log('||| END handleWeatherbitApi function')
+
     return {
       'description': APIData.data[0].weather.description,
       'lat': lat,
@@ -103,7 +111,9 @@ const handleWeatherbitApi = async (city, daysToStart, startDate, endDate) => {
   }catch (e) {
     console.log('Error in WeatherbitApi: ' + e);
   }
+
 }
+
 
 // call GeoName API input[lat, lon, key] output[countryName]         {{.then}}
 const handleGeoNameApi = async (data) => {
@@ -120,6 +130,9 @@ const handleGeoNameApi = async (data) => {
 
   try{
     const APIData = await response.json();
+
+    console.log('||| END handleGeoNameApi function')
+
     return {
       'country': APIData.countryName,
       'city': data.city,
@@ -165,6 +178,9 @@ const handlePixabayApi = async (data) => {
     }
     console.log('||| final data: ', apiResponseData)
     saveTravel(apiResponseData)
+
+    console.log('||| END handlePixabayApi function')
+
     return apiResponseData;
   }catch (e) {
     console.log('Error in PixabayApi: ' + e);

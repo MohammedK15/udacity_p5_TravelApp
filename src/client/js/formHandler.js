@@ -1,6 +1,7 @@
 import isURLValid from "./validateURL";
 import isDateValid from "./validateDate";
 import moment from "moment";
+import updateUI from "./updateUserInterface";
 
 const postData = async (url = '', data = {}) => {
   const res = await fetch(url, {
@@ -43,6 +44,18 @@ const handleSubmit = async () => {
 
       const data = await postData('http://localhost:8081/add-travel', {travelInfo});
       console.log(data)
+      Toastify({
+        text: "Travel Saved Currently",
+        duration: 3000,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: 'center', // `left`, `center` or `right`
+        backgroundColor: "linear-gradient(to right, #c2edce, #badfe7)",
+        className: 'toastify__font-style',
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+      }).showToast();
+
+      await updateUI()
     }
     // const articleUrl = document.getElementById('url_article').value;
     // if (isURLValid(articleUrl)) {

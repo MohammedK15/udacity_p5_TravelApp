@@ -15,7 +15,8 @@ const isDateValid = (startDate, endDate) => {
             close: true,
             gravity: "bottom", // `top` or `bottom`
             position: 'center', // `left`, `center` or `right`
-            backgroundColor: "linear-gradient(to right, #e34f51, #9fdfd8a3)",
+            backgroundColor: "linear-gradient(to right, #ff6c6f, #badfe7)",
+            className: 'toastify__font-style',
             stopOnFocus: true, // Prevents dismissing of toast on hover
             // onClick: function(){} // Callback after click
         }).showToast();
@@ -28,7 +29,8 @@ const isDateValid = (startDate, endDate) => {
             close: true,
             gravity: "bottom", // `top` or `bottom`
             position: 'center', // `left`, `center` or `right`
-            backgroundColor: "linear-gradient(to right, #e34f51, #9fdfd8a3)",
+            backgroundColor: "linear-gradient(to right, #ff6c6f, #9abfb7)",
+            className: 'toastify__font-style',
             stopOnFocus: true, // Prevents dismissing of toast on hover
         }).showToast();
         return false
@@ -40,7 +42,8 @@ const isDateValid = (startDate, endDate) => {
             close: true,
             gravity: "bottom", // `top` or `bottom`
             position: 'center', // `left`, `center` or `right`
-            backgroundColor: "linear-gradient(to right, #e34f51, #9fdfd8a3)",
+            backgroundColor: "linear-gradient(to right, #ff6c6f, #badfe7)",
+            className: 'toastify__font-style',
             stopOnFocus: true, // Prevents dismissing of toast on hover
         }).showToast();
         return false

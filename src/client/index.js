@@ -12,7 +12,6 @@ window.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
     console.log('||| in addEventListener')
     handleSubmit();
-    updateUI();
   })
 })
 
