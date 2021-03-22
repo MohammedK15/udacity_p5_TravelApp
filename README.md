@@ -25,3 +25,8 @@ Mohammed Almufarrij.
 * Then run the command "npm run start".
 
 - To do some testes run the command "npm run test"
+
+
+## some stand out feature:
+* trip long.
+* Toastify library for displaying nice notifications to the user.
