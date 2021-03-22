@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const updateUI = async () => {
   const getTravel = await fetch('http://localhost:8081/get-travels')
 
@@ -66,6 +68,12 @@ const updateUI = async () => {
       const endDateLI = document.createElement('li')
       endDateLI.innerText = `Depart Date: ${travels[i].endDate}`
       bodyUL.appendChild(endDateLI)
+
+      const lengthOfTrip = document.createElement('li')
+      const momentStartDate = moment(travels[i].startDate)
+      const momentEndDate = moment(travels[i].endDate)
+      lengthOfTrip.innerText = `Trip long in Days: ${momentEndDate.diff(momentStartDate, 'days') + 1}`
+      bodyUL.appendChild(lengthOfTrip)
 
       const description = document.createElement('li')
       description.innerText = `The Weather Forecast: ${travels[i].description}`
